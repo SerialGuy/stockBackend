@@ -10,7 +10,7 @@ import pandas.tseries.offsets as offsets
 router = APIRouter()
 
 # Load LSTM model
-model = load_model("src/pages/api/model/lstm_klse_model.h5", compile=False)
+model = load_model("./lstm_klse_model.h5", compile=False)
 model.compile(optimizer='adam', loss='mean_squared_error')
 
 @router.get("/predict/v1")

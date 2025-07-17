@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from src.pages.api.model.predict_api import router as v1_router
-from src.pages.api.model.predict_api_v2 import router as v2_router
+from predict_api import router as v1_router
+from predict_api_v2 import router as v2_router
 
 app = FastAPI()
 

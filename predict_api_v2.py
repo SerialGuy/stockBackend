@@ -11,8 +11,8 @@ import ta
 router = APIRouter()
 
 # 1️⃣ Load model and scaler
-model = load_model("src/pages/api/model/lstm_klse_advanced_v2.h5", compile=False)
-scaler = joblib.load("src/pages/api/model/klse_scaler_v2.pkl")
+model = load_model("./lstm_klse_advanced_v2.h5", compile=False)
+scaler = joblib.load("./klse_scaler_v2.pkl")
 
 # 2️⃣ Features used during training
 features = ['Stock_Close', 'KLSE_Close', 'RSI', 'MACD', 'SMA', 'EMA', 'Stock_Volume']
