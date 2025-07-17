@@ -4,7 +4,7 @@ from sklearn.preprocessing import MinMaxScaler
 import yfinance as yf
 import numpy as np
 import pandas as pd
-from datetime import timedelta
+from datetime import datetime,timezone, timedelta
 import pandas.tseries.offsets as offsets
 
 router = APIRouter()
@@ -60,12 +60,13 @@ def predict_next_30_days():
         # Generate next 30 business days from the last date in df
         last_date = df.index[-1]
         future_dates = pd.bdate_range(last_date + timedelta(days=1), periods=30).strftime('%Y-%m-%d').tolist()
-
+        now_utc = datetime.now(timezone.utc)
         return {
             "forecast": forecast.tolist(),
             "dates": future_dates,
             "history_dates": history_dates,
-            "history_prices": history_prices
+            "history_prices": history_prices,
+            "response_timestamp": now_utc.isoformat().replace('+00:00', 'Z')
         }
 
     except Exception as e:

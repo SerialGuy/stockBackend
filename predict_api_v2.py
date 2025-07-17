@@ -65,14 +65,15 @@ def predict_next_10_days():
     history_prices = history['Stock_Close'].values.tolist()
 
     # Generate next 10 business days from the last date in df
-    from datetime import timedelta
+    from datetime import datetime,timezone, timedelta
     import pandas as pd
     last_date = df.index[-1]
     future_dates = pd.bdate_range(last_date + timedelta(days=1), periods=30).strftime('%Y-%m-%d').tolist()
-
+    now_utc = datetime.now(timezone.utc)
     return {
         "forecast": predictions,
         "dates": future_dates,
         "history_dates": history_dates,
-        "history_prices": history_prices
+        "history_prices": history_prices,
+        "response_timestamp": now_utc.isoformat().replace('+00:00', 'Z')
     }
